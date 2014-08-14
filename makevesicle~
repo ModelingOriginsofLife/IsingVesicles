@@ -1,0 +1,2 @@
+g++ foodchain.cpp fblib.cpp inputs.cpp imgload.cpp -o foodchain -lm -lpng -lSDL \
+-DSDL -DLINUX -O6 -m64 -std=c++11 -w
