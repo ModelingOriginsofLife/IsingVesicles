@@ -144,7 +144,7 @@ int XR,YR;
 Cell *Grid;
 
 double INTERFACE = 4.0;
-double TENSION = 8.0;
+double TENSION = -0.1*8.0;
 double TEMP = 20.0;
 
 double interaction[9] =
@@ -599,6 +599,8 @@ void Init()
 int main(int argc, char **argv)
 {
 	int t1,t2;
+	
+	srand(time(NULL));
 	
 	Init();
 	XRes=XR*4; YRes=YR*4;
