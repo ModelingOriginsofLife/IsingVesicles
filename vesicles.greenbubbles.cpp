@@ -144,7 +144,8 @@ int XR,YR;
 Cell *Grid;
 
 double INTERFACE = 4.0;
-double TENSION = 8.0;
+// double TENSION = 8.0;  // original
+double TENSION = -0.1*8.0; // green bubbles on the side of red vesicles...
 double TEMP = 20.0;
 
 double interaction[9] =
@@ -558,12 +559,16 @@ void Render()
 				case 2: r=0; g=0; b=255; break;
 			}
 			
-//			ScreenBuf[(xm+ym*XRes)*Bpp]=b;
-//			ScreenBuf[(xm+ym*XRes)*Bpp+1]=g;
-//			ScreenBuf[(xm+ym*XRes)*Bpp+2]=r;
+#ifdef __APPLE__
 			ScreenBuf[(xm+ym*XRes)*Bpp+3]=b;
 			ScreenBuf[(xm+ym*XRes)*Bpp+2]=g;
 			ScreenBuf[(xm+ym*XRes)*Bpp+1]=r;
+#else
+			ScreenBuf[(xm+ym*XRes)*Bpp]=b;
+			ScreenBuf[(xm+ym*XRes)*Bpp+1]=g;
+			ScreenBuf[(xm+ym*XRes)*Bpp+2]=r;
+#endif
+
 		}
 		}
 		
@@ -592,11 +597,9 @@ void Init()
 		{
 			int r=sqrt(pow(x-XR/2,2)+pow(y-YR/2,2));
 			
-//			if (r<30) Grid[x+y*XR].phase = 0;
-//			else Grid[x+y*XR].phase=2;
-			Grid[x+y*XR].phase=2;
-
-			if (rand()%5==0) Grid[x+y*XR].phase=0;
+			if (r<30) Grid[x+y*XR].phase = 0;
+			else Grid[x+y*XR].phase=2;
+			
 			if (rand()%20==0) Grid[x+y*XR].phase=1;
 		}
 }
