@@ -1,0 +1,21 @@
+
+# native mac compiler for mountain lion precludes use of -std=c++11 or =std=c++0x
+# (maybe compiler that comes with yosemite is ok??)
+# so must install more modern compiler.  Following are
+# steps for installing modern gcc / g++ using homebrew:
+# brew update
+# brew tap homebrew/dupes
+# brew install gcc48 --enable-cxx --enable-fortran --use-llvm
+# brew install gcc --enable-cxx --enable-fortran --use-llvm
+# brew link --overwrite --dry-run gcc
+# sudo mv /usr/local/lib/gcc /usr/local/lib/gcc_
+# brew link --overwrite gcc
+# 
+# compile vesicles with compiler installed as above:
+# note need for SDL and libpng
+# note addition of -lSDLmain and -framework Cocoa
+
+/usr/local/bin/g++-5 veswetdry.cpp fblib.cpp inputs.cpp imgload.cpp -o veswetdry -lm -lpng \
+-lSDLmain -lSDL -framework Cocoa \
+-DSDL -DLINUX -O6 -std=c++11 -m64 -w -L/opt/local/lib/ 
+
